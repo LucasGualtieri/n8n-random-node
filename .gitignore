@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+dist/
+npm-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+.pnpm-debug.log*
+
+# TypeScript
+*.tsbuildinfo
+
+# n8n
+.n8n/custom/
+.n8n/settings.json
+.n8n/local-files/
+
+# Docker
+docker-compose.override.yml
+*.env
+**/tmp/
+**/logs/
+
+# OS
+.DS_Store
+Thumbs.db
+

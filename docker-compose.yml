@@ -1,0 +1,45 @@
+services:
+  postgres:
+    image: postgres:16
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: n8n
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  n8n:
+    image: n8nio/n8n:1.85.4
+    restart: unless-stopped
+    depends_on:
+      - postgres
+    environment:
+      # Database
+      - DB_TYPE=postgresdb
+      - DB_POSTGRESDB_HOST=postgres
+      - DB_POSTGRESDB_PORT=5432
+      - DB_POSTGRESDB_DATABASE=n8n
+      - DB_POSTGRESDB_USER=postgres
+      - DB_POSTGRESDB_PASSWORD=postgres
+
+      # n8n
+      - GENERIC_TIMEZONE=America/Sao_Paulo
+      - N8N_HOST=0.0.0.0
+      - N8N_PORT=5678
+      - N8N_CUSTOM_EXTENSIONS=/home/node/.n8n/custom
+      - N8N_RUNNERS_ENABLED=true
+
+      # (opcional) basic auth para proteger a UI localmente
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=admin
+      - N8N_BASIC_AUTH_PASSWORD=admin
+
+    ports:
+      - "5678:5678"
+    volumes:
+      # monta uma pasta local como /home/node/.n8n no container
+      - ./n8n_data:/home/node/.n8n
+
+volumes:
+  postgres-data:

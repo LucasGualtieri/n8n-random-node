@@ -1,0 +1,33 @@
+{
+	"name": "n8n-nodes-random",
+	"version": "0.1.0",
+	"description": "Random node for n8n (True Random Number Generator via random.org)",
+	"main": "dist/index.js",
+	"files": [
+		"dist"
+	],
+	"scripts": {
+		"build": "tsc -p tsconfig.json",
+		"clean": "rm -rf dist",
+		"test": "echo \"No unit tests (yet)\" && exit 0"
+	},
+	"keywords": [
+		"n8n-community-node-package"
+	],
+	"license": "MIT",
+	"engines": {
+		"node": ">=18.0.0"
+	},
+	"devDependencies": {
+		"@types/node": "^24.5.2",
+		"n8n-core": "^1.112.1",
+		"n8n-workflow": "^1.110.0",
+		"typescript": "^5.3.0"
+	},
+	"n8n": {
+		"n8nNodesApiVersion": 1,
+		"nodes": {
+			"file": "dist/nodes/Random/Random.node.js"
+		}
+	}
+}
